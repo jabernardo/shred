@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 
-	shredder "github.com/jabernardo/shred/shredder"
+	Dumper "github.com/jabernardo/shred/dumper"
 
-	aargh "github.com/jabernardo/aargh"
+	Aargh "github.com/jabernardo/aargh"
 )
 
 func main() {
-	app := aargh.New()
-	shred := shredder.New()
+	app := Aargh.New()
 
-	shred.Remove("/home/sudoaldrich/Workspace/todo")
+	dumper := Dumper.New()
+	dumper.Dump("/home/sudoaldrich/Workspace/todo")
 
 	app.Run()
 
