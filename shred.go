@@ -1,21 +1,20 @@
 package main
 
 import (
-	"fmt"
-
-	Dumper "github.com/jabernardo/shred/dumper"
-
 	Aargh "github.com/jabernardo/aargh"
 )
 
 func main() {
 	app := Aargh.New()
 
-	dumper := Dumper.New(Dumper.ModeBrutal)
+	// Set help screen
+	app.Command("help", CommandHelp)
 
-	dumper.Dump("/home/sudoaldrich/Workspace/hello.rs")
+	// Set default command
+	app.Command("help", CommandHelp)
+
+	// Modes
+	app.Command("simple", CommandShredSimple)
 
 	app.Run()
-
-	fmt.Println("Hello")
 }
