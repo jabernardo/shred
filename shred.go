@@ -11,8 +11,9 @@ import (
 func main() {
 	app := Aargh.New()
 
-	dumper := Dumper.New()
-	dumper.Dump("/home/sudoaldrich/Workspace/todo")
+	dumper := Dumper.New(Dumper.ModeBrutal)
+
+	dumper.Dump("/home/sudoaldrich/Workspace/hello.rs")
 
 	app.Run()
 

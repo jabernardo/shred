@@ -9,11 +9,23 @@ import (
 	"time"
 )
 
-type Dumper struct{}
+type Dumper struct {
+	Level int
+}
+
+const (
+	ModeSimple  int = 1
+	ModeAdvance     = 3
+	ModeComplex     = 7
+	ModeBrutal      = 35
+)
 
 // New Dumper
-func New() *Dumper {
-	return &Dumper{}
+func New(level int) *Dumper {
+	new := &Dumper{}
+	new.Level = level
+
+	return new
 }
 
 // Generate some garbage
@@ -80,20 +92,37 @@ func (this *Dumper) Dump(path string) bool {
 	info, err := os.Stat(path)
 
 	if err != nil {
+		fmt.Println("No path: ", path)
 		return false
 	}
 
 	if info.IsDir() {
 		for _, file := range this.GetContents(path, true) {
+			for i := 0; i < this.Level; i++ {
+				this.OverrideFile(file)
+			}
+
 			fmt.Println(file)
-			this.OverrideFile(file)
 		}
+	} else {
+		this.OverrideFile(path)
+		fmt.Println(path)
 	}
 
 	name_length := len(info.Name())
 	name_size := uint64(name_length)
 	temp_name := filepath.Dir(path) + string(os.PathSeparator) + this.Random(name_size)
+
+	// Rename path
 	err = os.Rename(path, temp_name)
+
+	if err != nil {
+		return false
+	}
+
+	// Remove file
+
+	err = os.RemoveAll(temp_name)
 
 	if err != nil {
 		return false
