@@ -22,5 +22,5 @@ func main() {
 	app.Command("complex", CommandShredComplex)
 	app.Command("brutal", CommandShredBrutal)
 
-	app.Run()
+	app.Run(true)
 }
