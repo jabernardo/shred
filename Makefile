@@ -16,7 +16,7 @@ LDFLAGS=-ldflags "-X=main.Build=$(BUILD)"
 all: help
 
 ## build: Compile binary
-build: clean go-build
+build: clean go-get go-build
 
 ## exec: Compile binary and run
 exec: build go-run
